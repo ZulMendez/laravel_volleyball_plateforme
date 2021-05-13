@@ -21,7 +21,7 @@
                         @forelse ($equipes  as $equipe)
                             <p> <b>Equipe {{ $equipe->id }} :</b> {{ $equipe->nom }}</p>
                         @empty
-                            <p>pas d'équipes dispo</p>
+                            <p>pas d'équipes disponibles</p>
                         @endforelse
                         <a href="{{ route('equipe.index') }}" class="btn btn-primary">GO equipes</a>
                     </div>
@@ -31,10 +31,10 @@
                 <div class="card">
                     <h3 class="my-3">Mini récap joueurs</h3>
                     <div class="card-body">
-                        @forelse ($joueurs  as $joueur) 
+                        @forelse ($joueurs as $joueur) 
                             <p> <b>Joueur {{ $joueur->id }} :</b> {{ $joueur->prenom }}</p>
                         @empty
-                            <p>pas de joueurs dispo</p>
+                            <p>pas de joueurs disponibles</p>
                         @endforelse
                         <a href="{{ route('joueur.index') }}" class="btn btn-primary">GO joueurs</a>
                     </div>
