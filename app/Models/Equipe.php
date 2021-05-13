@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Equipe extends Model
 {
     use HasFactory;
+
+    public function continent() {
+        return $this->belongsTo(Continent::class);
+    }
+
+    public function joueurs() {
+        return $this->hasmany(Joueur::class);
+    }
 }

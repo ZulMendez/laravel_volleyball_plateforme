@@ -19,8 +19,12 @@ class CreateEquipesTable extends Migration
             $table->string('ville');
             $table->string('pays');
             $table->integer('max');
-            // $table->unsignedBigInteger('continent_id');
-            // $table->foreign('continent_id')->references('id')->on('continents');
+            $table->integer('AT');
+            $table->integer('CT');
+            $table->integer('DC');
+            $table->integer('RP');
+            $table->unsignedBigInteger('continent_id');
+            $table->foreign('continent_id')->references('id')->on('continents');
             $table->timestamps();
         });
     }

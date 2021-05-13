@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Continent;
 use App\Models\Equipe;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class EquipeController extends Controller
      */
     public function index()
     {
-        //
+        $equipes = Equipe::all();
+        return view('admin.equipes.main', compact('equipes'));
     }
 
     /**
@@ -24,7 +26,8 @@ class EquipeController extends Controller
      */
     public function create()
     {
-        //
+        $continents = Continent::all();
+        return view('admin.equipes.create', compact('continents'));
     }
 
     /**
@@ -35,7 +38,25 @@ class EquipeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => ['required', 'min:2'],
+            'ville' => ['required','min:2'],
+            'pays' => ['required','min:2'],
+            'continent_id' => ['required'],
+            'max' => ['required', 'numeric'],
+        ]);
+        $equipe = new Equipe();
+        $equipe->nom = $request->nom;
+        $equipe->ville = $request->ville;
+        $equipe->pays = $request->pays;
+        $equipe->continent_id = $request->continent_id;
+        $equipe->max = $request->max;
+        $equipe->AT = 0;
+        $equipe->CT = 0;
+        $equipe->DC = 0;
+        $equipe->RP = 0;
+        $equipe->save();
+        return redirect()->route('equipe.index')->with('success', $request->nom . ' a bien été créé');
     }
 
     /**
@@ -46,7 +67,7 @@ class EquipeController extends Controller
      */
     public function show(Equipe $equipe)
     {
-        //
+        return view('admin.equipes.show', compact('equipe'));
     }
 
     /**
@@ -57,7 +78,8 @@ class EquipeController extends Controller
      */
     public function edit(Equipe $equipe)
     {
-        //
+        $continents = Continent::all();
+        return view('admin.equipes.edit', compact('equipe', 'continents'));
     }
 
     /**
@@ -69,7 +91,20 @@ class EquipeController extends Controller
      */
     public function update(Request $request, Equipe $equipe)
     {
-        //
+        $request->validate([
+            'nom' => ['required','min:2'],
+            'ville' => ['required','min:2'],
+            'pays' => ['required','min:2'],
+            'continent_id' => ['required'],
+            'max' => ['required', 'numeric'],
+        ]);
+        $equipe->nom = $request->nom;
+        $equipe->ville = $request->ville;
+        $equipe->pays = $request->pays;
+        $equipe->continent_id = $request->continent_id;
+        $equipe->max = $request->max;
+        $equipe->save();
+        return redirect()->route('equipe.index')->with('success', $request->nom . ' a bien été modifié');
     }
 
     /**
@@ -80,6 +115,7 @@ class EquipeController extends Controller
      */
     public function destroy(Equipe $equipe)
     {
-        //
+        $equipe->delete();
+        return redirect()->route('equipe.index')->with('warning', 'Equipe supprimé');
     }
 }

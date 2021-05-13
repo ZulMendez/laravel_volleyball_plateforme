@@ -16,19 +16,19 @@ class RoleSeeder extends Seeder
     {
         DB::table('roles')->insert([
             [
-                "poste" => "avant",
+                "poste" => "Avant",
                 "created_at" => now(),
             ],
             [
-                "poste" => "central",
+                "poste" => "Central",
                 "created_at" => now(),
             ],
             [
-                "poste" => "arriere",
+                "poste" => "Arriere",
                 "created_at" => now(),
             ],
             [
-                "poste" => "remplace",
+                "poste" => "Remplacant",
                 "created_at" => now(),
             ],
         ]);

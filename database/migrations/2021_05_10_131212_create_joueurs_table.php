@@ -18,10 +18,20 @@ class CreateJoueursTable extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->integer('age');
-            $table->integer('tel');
+            $table->bigInteger('tel');
             $table->string('email');
-            $table->string('genre');
-            $table->string('origine');
+            
+            $table->unsignedBigInteger('photo_id');
+            $table->foreign('photo_id')->references('id')->on('photos')->onDelete('cascade');
+
+            $table->unsignedBigInteger('genre_id');
+            $table->foreign('genre_id')->references('id')->on('genres');
+
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles');
+
+            $table->unsignedBigInteger('equipe_id')->nullable();
+            $table->foreign('equipe_id')->references('id')->on('equipes')->onDelete('cascade');
             $table->timestamps();
         });
     }
